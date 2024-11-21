@@ -7,6 +7,7 @@
 3. Usa el resultado (sin espacios) como `PSW_EMAIL`.
 
 ### Ejemplo de archivo `.env`:
+
 ```bash
 # Correo asociado a tu cuenta Gmail
 EMAIL=developer.testing123@gmail.com
@@ -14,4 +15,5 @@ EMAIL=developer.testing123@gmail.com
 # Contraseña generada desde Contraseñas de Aplicaciones
 PSW_EMAIL=xyza12bc34def567ghij890klmnopqrs
 ```bash
+
 <img src="portada.png"></img>
