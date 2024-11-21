@@ -16,4 +16,4 @@ EMAIL=developer.testing123@gmail.com
 PSW_EMAIL=xyza12bc34def567ghij890klmnopqrs
 ```
 
-<img src="portada.png"></img>
+<img src="https://github.com/arceprogramando/bot-gmail-institucional/blob/main/src/portada.png"></img>
