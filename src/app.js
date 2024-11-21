@@ -1,15 +1,10 @@
-/*Aplicacion para enviar un gmail preguntando por que sucedio con la materia con nodejs y nodemailer*/
 
-// Importamos los modulos necesarios
+import express from 'express';
+import nodemailer from 'nodemailer';
 
-import express from "express";
-import nodemailer from "nodemailer";
-
-import dotenv from "dotenv";
-// Creamos una instancia de express
+import dotenv from 'dotenv';
 
 dotenv.config();
-
 
 const app = express();
 
@@ -17,11 +12,12 @@ const app = express();
 
 const PORT = 3000;
 
-const name = 'Juanito'
+const name = 'Juanito';
 
-// Configuramos el nodemailer
-console.log(process.env.EMAIL)
-console.log(process.env.PSW_EMAIL)
+if (!process.env.EMAIL) console.log('No se ha configurado el email');
+
+if (!process.env.PSW_EMAIL) console.log('No se ha configurado la contraseña del email');
+
 const Transporter = nodemailer.createTransport({
   service: 'gmail',
   user: 'smtp.gmail.com',
@@ -35,12 +31,12 @@ const Transporter = nodemailer.createTransport({
 
 // Configuramos la ruta
 
-app.get('/', (req, res) => {
-    const mailOptions = {
-      from: process.env.EMAIL,
-      to: 'arceprogramando@gmail.com',
-      subject: 'Consulta sobre la clase de programación',
-      html: `
+app.get('/', (_req, res) => {
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: 'arceprogramando@gmail.com',
+    subject: 'Consulta sobre la clase de programación',
+    html: `
         <body style="font-family: 'Poppins', Arial, sans-serif">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
@@ -87,20 +83,15 @@ app.get('/', (req, res) => {
             </table>
         </body>
       `,
-    };
-    
-    Transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            res.status(500).send(error.message);
-        } else {
-            res.status(200).send('Email enviado correctamente');
-        }
-    });
+  };
+
+  Transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else {
+      res.status(200).send('Email enviado correctamente');
+    }
+  });
 });
 
-// Iniciamos el servidor
-
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`);
-});
-
+app.listen(PORT, () => console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`));
